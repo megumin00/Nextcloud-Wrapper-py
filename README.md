@@ -5,7 +5,7 @@ Nextcloud wrapper written python for a collaborative databot project
 TBD
 
 ## License
-GNU General Public License
+GPL-3.0 License
 
 ## Contributors
 megumin00
