@@ -2,7 +2,7 @@
 Nextcloud wrapper written python for a collaborative databot project
 
 ## Examples
-TBD
+/example.py
 
 ## License
 GPL-3.0 License
