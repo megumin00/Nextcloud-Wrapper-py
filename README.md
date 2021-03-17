@@ -1,5 +1,5 @@
 # Nextcloud-Wrapper-py
-Nextcloud wrapper written python for a collaborative databot project
+Nextcloud wrapper written in python for a collaborative databot project
 
 ## Examples
 /example.py
