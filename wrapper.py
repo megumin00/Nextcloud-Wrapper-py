@@ -33,13 +33,20 @@ class nc_wrapper:
     
     def download(self, suffix):
         full_url = self.base_url+suffix
-        print("Now trying %s" % full_url)
 
         result = requests.request(method="GET", url=full_url, auth=self.auth_tuple, timeout=60.0, verify=True)
         if (result.status_code == 200):
             return result.content
         else:
             return result.reason
+
+    def list():
+        full_url = self.base_url+suffix
+        
+        result = requests.request(method="PROPFIND", url=full_url, auth=self.auth_tuple, timeout=60.0, verify=True)
+        print(result.status_code)
+        print(result.reason)
+        print(result.content)
     
     def upload(self, filename, destination):
         all_headers = {}
@@ -58,9 +65,9 @@ if __name__ == '__main__':
     passwd = getpass.getpass()
     nc_wrapper = nc_wrapper(server_link, user, passwd)
 
-    # Now for the real test: try a GET request using WebDAV!
+    # Now for the real test: try to LIST remote files, using WebDAV
     #if (server_link[-1] == "/"):
     #else:
-    get_text = nc_wrapper.download("/remote.php/dav/files/"+user+"/Documents/")
+    get_text = nc_wrapper.list("/remote.php/dav/files/"+user+"/Documents/")
     print(get_text)
 
