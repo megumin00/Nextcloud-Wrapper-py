@@ -5,20 +5,6 @@
     to the Nextcloud server.
 
     Requests documentation: https://docs.python-requests.org/en/master/api/
-    
-    This test actually demonstrates how the python requests API will NOT be
-    sufficient for accessing files using webDAV urls.
-
-    An example execution I/O excerpt is:
-    ```
-    server name: https://www.example.com/nextcloud
-    username: chozorho
-    Password:
-    Now trying https://www.example.com/nextcloud/remote.php/dav/files/chozorho/Documents/
-    b'This is the WebDAV interface. It can only be accessed by WebDAV clients such as the Nextcloud desktop sync client.'
-    ```
-
-    So we'll need to use a different API.
 
 """
 import getpass, requests
