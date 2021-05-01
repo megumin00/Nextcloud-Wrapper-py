@@ -31,24 +31,25 @@ class nc_wrapper:
         self.basic_auth_headers = { "username":user_val, "password":pass_val }
         self.auth_tuple = ( user_val, pass_val )
     
-    def download(self, suffix):
-        full_url = self.base_url+suffix
+    def download(self, suffix, filename):
+        full_url = self.base_url + suffix + filename
 
-        result = requests.request(method="GET", url=full_url, auth=self.auth_tuple, timeout=60.0, verify=True)
+        result = requests.request(method="GET", url=full_url, headers={"OCS-APIRequest": "true"}, auth=self.auth_tuple, timeout=60.0, verify=True)
         if (result.status_code == 200):
-            return result.content
-        else:
-            return result.reason
+            output_f = open(filename, "wb")
+            output_f.write(result.content)
+            output_f.close()
+        return result.reason
 
-    def list():
-        full_url = self.base_url+suffix
+    def list(self, path):
+        full_url = self.base_url+path
         
         result = requests.request(method="PROPFIND", url=full_url, auth=self.auth_tuple, timeout=60.0, verify=True)
         print(result.status_code)
         print(result.reason)
         print(result.content)
     
-    def upload(self, filename, destination):
+    def upload(self, dest_path, filename):
         all_headers = {}
         full_url = self.base_url+suffix
         #result = requests.request(method="POST", url=full_url, headers=, timeout=60.0, verify=True)
@@ -68,6 +69,13 @@ if __name__ == '__main__':
     # Now for the real test: try to LIST remote files, using WebDAV
     #if (server_link[-1] == "/"):
     #else:
-    get_text = nc_wrapper.list("/remote.php/dav/files/"+user+"/Documents/")
+
+    # List remote files in a server-side Documents directory
+    #list_text = nc_wrapper.list("/remote.php/dav/files/"+user+"/Documents/")
+    #print(list_text)
+    
+    # Download a remote file
+    file_to_retrieve = "ale-video-slides---megumin-math-problem.odp"
+    get_text = nc_wrapper.download("/remote.php/dav/files/"+user+"/Documents/", file_to_retrieve)
     print(get_text)
 
